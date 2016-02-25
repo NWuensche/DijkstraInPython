@@ -32,7 +32,7 @@ class InputParser:
 
         # nxn Nullmatrix initialisieren mit n=|verts|
         size = len(verts)
-        matrix = [[ 0 for i in range(size)] for j in range(size)]
+        matrix = [[ -1 for i in range(size)] for j in range(size)]
         # Ausgehende Kanten für jeden Knoten bestimmen,
         # zugehörige gewichte in adj-Matrix speichern
         for v in verts:
@@ -46,9 +46,6 @@ class InputParser:
     def check_edges(self,edges):
          #Schaut, ob zu viele oder zu wenig Argumente und ob alles Zahlen sind
          for edge in edges:
-            # Edge, die 3 Zahlen hatte,
-            #      kann ich verarbeitung auch "" als 4te Stelle habem, aber dennoch
-            #      richtig sein => berücksichtigen
             if len(edge) == 4 and edge[3] == "":
                 continue
             elif len(edge)>3 and edge[3]!="":
