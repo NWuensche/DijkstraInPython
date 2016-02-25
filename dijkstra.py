@@ -6,10 +6,18 @@ class Dijkstra:
         self.s = start
         self.dists = [0 for x in range(len(adj))]
 
+    # Liefert minimales Element > 0
     def minweight(self, verts):
         return min([x for x in verts if x>0])
 
+    # Baut liste der Entfernungen von s ausgehend auf
     def dist_list(self):
-        pass
+
+        i = s
+
+        for v in adj[i]:
+            if v>0:
+                self.dists[adj[s].index(v)] = v
+
 
 

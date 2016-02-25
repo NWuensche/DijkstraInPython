@@ -16,7 +16,7 @@ def main():
     p = InputParser()
     adj = p.get_matrix()
     v1, v2 = p.get_path()
-    print(v1,v2)
+
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
 
