@@ -19,6 +19,8 @@ def main():
     print_matrix(adj)
     DG = ComputeTools(adj)
     print_matrix(DG.matrix)
+    DG.calculateWholeDG()
+    print_matrix(DG.matrix)
 
 if __name__ == '__main__':
     main()
