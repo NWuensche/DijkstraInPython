@@ -63,7 +63,7 @@ class InputParser:
 
     def get_path(self):
         print("Please specify path to minimize")
-        print("(format: 'vertex1 vertex2'")
+        print("(format: 'vertex1 vertex2)'")
         return self.check_path(input().split())
 
     def check_path(self, path):
