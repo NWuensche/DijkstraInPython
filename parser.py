@@ -2,12 +2,12 @@
 
 class InputParser:
     def __init__(self):
-        pass
+        self.verts = None
 
-    def get_input(self):
+    def get_matrix(self):
 
         print("Please enter vertices and edge weights")
-        print("(format: [[start,weight,end],[...],...]")
+        print("(format: '[[start,weight,end],[...],...]'")
         inp = input()
 
         # Input als Liste von Kanten ([a,x,b]) parsen
@@ -23,13 +23,13 @@ class InputParser:
             verts_out = {x[0] for x in edges}
             verts_in  = {x[2] for x in edges}
             verts_out.update(verts_in)
-            verts = sorted(list(verts_out))
-            return self.adjmatrix(verts,edges)
+            self.verts = sorted(list(verts_out))
+            return self.adjmatrix(edges)
         else:
-            return self.get_input()
+            return self.get_matrix()
 
-    def adjmatrix(self, verts, edges):
-
+    def adjmatrix(self, edges):
+        verts = self.verts
         # nxn Nullmatrix initialisieren mit n=|verts|
         size = len(verts)
         matrix = [[ -1 for i in range(size)] for j in range(size)]
@@ -44,7 +44,7 @@ class InputParser:
         return matrix
 
     def check_edges(self,edges):
-         #Schaut, ob zu viele oder zu wenig Argumente und ob der Weg ein float/int sind
+         #Schaut, ob zu viele oder zu wenig Argumente und ob der Weg ein float/int ist
          for edge in edges:
             if len(edge) == 4 and edge[3] == "":
                 continue
@@ -60,3 +60,17 @@ class InputParser:
                         print("Invalid Syntax: Weight has to be a (float) number!")
                         return False
             return True
+
+    def get_path(self):
+        print("Please specify path to minimize")
+        print("(format: 'vertex1 vertex2'")
+        return self.check_path(input().split())
+
+    def check_path(self, path):
+        if len(path)==2 and path[0] in self.verts \
+                        and path[1] in self.verts:
+
+            return path
+        else:
+            print("Unknown vertices found.")
+            return self.get_path()

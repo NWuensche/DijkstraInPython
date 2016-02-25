@@ -14,9 +14,12 @@ def print_matrix(m):
 
 def main():
     p = InputParser()
-    adj = p.get_input()
+    adj = p.get_matrix()
+    v1, v2 = p.get_path()
+    print(v1,v2)
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
+
     DG = ComputeTools(adj)
     print_matrix(DG.matrix)
     DG.calculateWholeDG()
