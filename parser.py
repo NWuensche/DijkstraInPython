@@ -72,5 +72,5 @@ class InputParser:
 
             return path
         else:
-            print("Unknown vertices found.")
+            print("Invalid path.")
             return self.get_path()
