@@ -7,7 +7,7 @@ from calculate_shortest_way import *
 def print_matrix(m):
     for i in m:
         for j in i:
-            print('{0:3d}'.format(j),end='')
+            print('{0:6.1f}'.format(j).replace('-1.0',u' \u221e  '),end='')
         print ('', end='\n')
     print('')
 

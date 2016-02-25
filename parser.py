@@ -39,12 +39,12 @@ class InputParser:
             adj = [e for e in edges if e[0]==v]
             for a in adj:
                 matrix[verts.index(v)][verts.index(a[2])] = \
-                    int(a[1])
+                    float(a[1])
 
         return matrix
 
     def check_edges(self,edges):
-         #Schaut, ob zu viele oder zu wenig Argumente und ob alles Zahlen sind
+         #Schaut, ob zu viele oder zu wenig Argumente und ob der Weg ein float/int sind
          for edge in edges:
             if len(edge) == 4 and edge[3] == "":
                 continue
@@ -55,8 +55,8 @@ class InputParser:
                 print("Invalid Syntax: Too few arguments!")
                 return False
             else:
-                for item in edge:
-                    if(not item.isdigit()):
-                        print("Invalid Syntax: Just digits allowed!")
+                try: float(edge[1])
+                except ValueError:
+                        print("Invalid Syntax: Weight has to be a (float) number!")
                         return False
             return True
