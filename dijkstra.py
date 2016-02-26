@@ -19,5 +19,8 @@ class Dijkstra:
             if v>0:
                 self.dists[adj[s].index(v)] = v
 
-
-
+    # Ausgabe der kürzesten Wege von Knoten s zu alle anderen Knoten
+    def print_list(self):
+        print("Distance from Node "+ str(adj[self.s]) + " to:" )
+        for node in range(len(self.adj)):
+            print("\t\tNode "+str(adj[node])+ ": " + str(self.dists[node]))
