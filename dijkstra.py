@@ -24,6 +24,12 @@ class Dijkstra:
                     b_nodes.add(j)
             i = self.minweight_node(b_nodes)
 
+    # Liefert Randknoten mit minimalem Abstand zum Start
+    def minweight_node(self, b_nodes):
+        minweight = min([self.dists[x] for x in b_nodes])
+        node = self.dists.index(minweight)
+        b_nodes.discard(node)
+        return node
 
     # Ausgabe der kürzesten Wege von Knoten s zu alle anderen Knoten
     def print_list(self):
