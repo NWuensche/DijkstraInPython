@@ -16,13 +16,15 @@ def print_matrix(m):
 def main():
     p = InputParser()
     adj = p.get_matrix()
+    nodes = p.verts
     v1, v2 = p.get_path()
 
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
 
-    d = Dijkstra(adj,v1)
-    d.dist_list()
+    d = Dijkstra(adj,nodes,v1)
+    print ("Shortest way {0}-{1} (Dijkstra):".format(v1,v2),end='')
+    print (d.path_to(v2))
 
     # DG = ComputeTools(adj)
     # print_matrix(DG.matrix)

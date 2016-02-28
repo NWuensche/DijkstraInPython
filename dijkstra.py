@@ -2,8 +2,9 @@
 from math import *
 
 class Dijkstra:
-    def __init__(self, adj, start):
+    def __init__(self, adj, nodes, start):
         self.adj = adj
+        self.nodes = nodes
         self.s = start
         self.dists = [inf for x in range(len(adj))]
         self.dists[0] = 0
@@ -30,6 +31,8 @@ class Dijkstra:
         node = self.dists.index(minweight)
         b_nodes.discard(node)
         return node
+
+    def path_to(self, v2):
 
     # Ausgabe der kürzesten Wege von Knoten s zu alle anderen Knoten
     def print_list(self):
