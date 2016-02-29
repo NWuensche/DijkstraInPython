@@ -8,7 +8,7 @@ class InputParser:
 
         print("Please enter vertices and edge weights")
         print("(format: '[[start,weight,end],[...],...]'")
-        inp = input()
+        inp = input().strip()
 
         # Input als Liste von Kanten ([a,x,b]) parsen
         edges = ''.join(inp.split(']')).split('[')

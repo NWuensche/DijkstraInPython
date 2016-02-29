@@ -41,4 +41,4 @@ class Dijkstra:
     # Ausgabe der kürzesten Wege von Knoten s zu allen anderen Knoten
     def print_list(self):
         for n in range(len(self.nodes)):
-            print("{0} \u279c {1}: {2}".format(self.nodes[self.start], self.nodes[n], self.dists[n]))
+            print("   \u279c {0}: {1}".format(self.nodes[n], self.dists[n]))

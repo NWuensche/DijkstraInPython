@@ -27,7 +27,7 @@ def main():
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
     print(d.path_to(v2))
 
-    print("Other distances from {0}".format(v1))
+    print("Other distances from {0}:".format(v1))
     d.print_list()
 
     print("\nFloyd-Warshall:\n")
