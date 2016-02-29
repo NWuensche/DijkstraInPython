@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 class ComputeTools:
-    def __init__(self,adj):
+    def __init__(self,adj,nodes,start):
         self.make_diagonal_zero(adj)
         self.adj = adj
+        self.start = nodes.index(start)
+        self.nodes = nodes
 
 
     # Führt den i-ten Schritt aus, um DG(i) zu berechnen
@@ -26,3 +28,9 @@ class ComputeTools:
     def calculateWholeDG(self):
         for step in range(len(self.adj)):
             self.calculateDG(step)
+
+    def print_list_floyd(self):
+        self.calculateWholeDG()
+        for n in range(len(self.nodes)):
+            # TODO finde Buchstaben in Matrix
+            print("   \u279c {0}: {1}".format(self.nodes[n], (self.adj[self.start][n])).replace("-1",u'inf' ))

@@ -34,9 +34,9 @@ def main():
     d.print_list()
 
     print("\nFloyd-Warshall:\n")
-    DG = ComputeTools(adj)
+    DG = ComputeTools(adj,nodes,v1)
     print_matrix(DG.adj)
-    DG.calculateWholeDG()
+    DG.print_list_floyd()
     print_matrix(DG.adj)
 
     # TODO: Evtl. die beiden nähesten und weitest entferntesten Knoten angeben (...because everyone likes stats)
