@@ -22,10 +22,12 @@ class Dijkstra:
                 if v>0 and v+dists[i] < dists[j]:
                     dists[j] = v+dists[i]
                     b_nodes.add(j)
+
             i = self.minweight_node(b_nodes)
 
     # Liefert Randknoten mit minimalem Abstand zum Start
     def minweight_node(self, b_nodes):
+        if len(b_nodes)==0: return -1
         minweight = min([self.dists[x] for x in b_nodes])
         node = self.dists.index(minweight)
         b_nodes.discard(node)
