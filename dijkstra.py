@@ -33,12 +33,12 @@ class Dijkstra:
         b_nodes.discard(node)
         return node
 
+    # Gibt Entfernung zu einem Knoten aus dists wieder
     def path_to(self, v2):
         self.dist_list()
         return self.dists[self.nodes.index(v2)]
 
-    # Ausgabe der kürzesten Wege von Knoten s zu alle anderen Knoten
+    # Ausgabe der kürzesten Wege von Knoten s zu allen anderen Knoten
     def print_list(self):
-        print("Distance from Node "+ str(adj[self.s]) + " to:" )
-        for node in range(len(self.adj)):
-            print("\t\tNode "+str(adj[node])+ ": " + str(self.dists[node]))
+        for n in range(len(self.nodes)):
+            print("{0} \u279c {1}: {2}".format(self.nodes[self.start], self.nodes[n], self.dists[n]))
