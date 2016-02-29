@@ -5,6 +5,7 @@ from parser import *
 from calculate_shortest_way import *
 from dijkstra import *
 
+# Matrix mit Unicode multiline braces printen
 def print_matrix(m):
     for i in range(len(m)):
         print(' \u23a7' if i==0 else ' \u23aa' if i<len(m)-1 else ' \u23a9',end='')
@@ -22,6 +23,8 @@ def main():
 
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
+
+    # TODO: Evtl Quele und Senke angeben, falls existent
 
     d = Dijkstra(adj,nodes,v1)
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')

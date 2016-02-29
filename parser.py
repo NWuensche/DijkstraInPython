@@ -70,7 +70,6 @@ class InputParser:
         # Prüfen ob eingegebene Knoten in der Knotenmenge sind
         if len(path)==2 and path[0] in self.verts \
                         and path[1] in self.verts:
-
             return path
         else:
             print("Invalid path.")
