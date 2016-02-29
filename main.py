@@ -23,7 +23,7 @@ def main():
     print_matrix(adj)
 
     d = Dijkstra(adj,nodes,v1)
-    print ("Shortest way {0}-{1} (Dijkstra):".format(v1,v2),end='')
+    print ("Shortest way {0} \u2799 {1} (Dijkstra): ".format(v1,v2),end='')
     print (d.path_to(v2))
 
     # DG = ComputeTools(adj)

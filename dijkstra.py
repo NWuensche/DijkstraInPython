@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-from math import *
 
 class Dijkstra:
     def __init__(self, adj, nodes, start):
         self.adj = adj
         self.nodes = nodes
-        self.s = start
-        self.dists = [inf for x in range(len(adj))]
-        self.dists[0] = 0
+        self.start = nodes.index(start)
+        self.dists = [float('inf') for x in range(len(adj))]
+        self.dists[self.start] = 0
 
 
     # Baut liste der Entfernungen von s ausgehend auf
@@ -15,7 +14,7 @@ class Dijkstra:
         dists = self.dists
         nodecount = len(self.adj)
         b_nodes = set([]) # boundary nodes/Randknotenmenge
-        i = 0
+        i = self.start
 
         for l in range(nodecount):
             for j in range(nodecount):
@@ -33,6 +32,8 @@ class Dijkstra:
         return node
 
     def path_to(self, v2):
+        self.dist_list()
+        return self.dists[self.nodes.index(v2)]
 
     # Ausgabe der kürzesten Wege von Knoten s zu alle anderen Knoten
     def print_list(self):
