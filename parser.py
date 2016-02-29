@@ -2,11 +2,11 @@
 
 class InputParser:
     def __init__(self):
-        self.verts = None
+        self.nodes = None
 
     def get_matrix(self):
 
-        print("Please enter vertices and edge weights")
+        print("Please enter nodes and edge weights")
         print("(format: '[[start,weight,end],[...],...]'")
         inp = input().strip()
 
@@ -20,25 +20,25 @@ class InputParser:
 
             # Ziel- und Endknoten als set zusammenfassen,
             # dann in Liste sortieren
-            verts_out = {x[0] for x in edges}
-            verts_in  = {x[2] for x in edges}
-            verts_out.update(verts_in)
-            self.verts = sorted(list(verts_out))
+            nodes_out = {x[0] for x in edges}
+            nodes_in  = {x[2] for x in edges}
+            nodes_out.update(nodes_in)
+            self.nodes = sorted(list(nodes_out))
             return self.adjmatrix(edges)
         else:
             return self.get_matrix()
 
     def adjmatrix(self, edges):
-        verts = self.verts
-        # nxn Nullmatrix initialisieren mit n=|verts|
-        size = len(verts)
+        nodes = self.nodes
+        # nxn Nullmatrix initialisieren mit n=|nodes|
+        size = len(nodes)
         matrix = [[ -1 for i in range(size)] for j in range(size)]
         # Ausgehende Kanten für jeden Knoten bestimmen,
         # zugehörige gewichte in adj-Matrix speichern
-        for v in verts:
-            adj = [e for e in edges if e[0]==v]
+        for n in nodes:
+            adj = [e for e in edges if e[0]==n]
             for a in adj:
-                matrix[verts.index(v)][verts.index(a[2])] = \
+                matrix[nodes.index(n)][nodes.index(a[2])] = \
                     float(a[1])
 
         return matrix
@@ -63,13 +63,13 @@ class InputParser:
 
     def get_path(self):
         print("Please specify path to minimize")
-        print("(format: 'vertex1 vertex2)'")
+        print("(format: 'node1 node2')")
         return self.check_path(input().split())
 
     def check_path(self, path):
         # Prüfen ob eingegebene Knoten in der Knotenmenge sind
-        if len(path)==2 and path[0] in self.verts \
-                        and path[1] in self.verts:
+        if len(path)==2 and path[0] in self.nodes \
+                        and path[1] in self.nodes:
             return path
         else:
             print("Invalid path.")

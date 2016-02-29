@@ -18,13 +18,13 @@ def print_matrix(m):
 def main():
     p = InputParser()
     adj = p.get_matrix()
-    nodes = p.verts
+    nodes = p.nodes
     v1, v2 = p.get_path()
 
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
 
-    # TODO: Evtl Quele und Senke angeben, falls existent
+    # TODO: Evtl. Quelle und Senke angeben, falls existent
 
     d = Dijkstra(adj,nodes,v1)
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
@@ -38,6 +38,8 @@ def main():
     print_matrix(DG.matrix)
     DG.calculateWholeDG()
     print_matrix(DG.matrix)
+
+    # TODO: Evtl. die beiden nähesten und weitest entferntesten Knoten angeben (...because everyone likes stats)
 
 if __name__ == '__main__':
     main()
