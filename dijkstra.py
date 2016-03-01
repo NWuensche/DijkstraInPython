@@ -27,15 +27,18 @@ class Dijkstra:
                     dists[j] = v+dists[i]
                     b_nodes.add(j)
             # Speichert neue kürzteste Kante in Array
+            # TODO: Weg zu Endknoten speichern, kürzeste Kante nicht unbedingt Teil des Weges
             self.nodes_shortest_way.append([self.nodes[i],self.nodes[self.minweight_node(b_nodes)]])
+
             i = self.minweight_node(b_nodes)
+            b_nodes.discard(i)
 
     # Liefert Randknoten mit minimalem Abstand zum Start
     def minweight_node(self, b_nodes):
         if len(b_nodes)==0: return -1
         minweight = min([self.dists[x] for x in b_nodes])
         node = self.dists.index(minweight)
-        b_nodes.discard(node)
+        # b_nodes.discard(node)
         return node
 
     # Gibt Entfernung zu einem Knoten aus dists wieder
