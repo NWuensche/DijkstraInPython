@@ -7,6 +7,9 @@ class Dijkstra:
         self.start = nodes.index(start)
         self.dists = [float('inf') for x in range(len(adj))]
         self.dists[self.start] = 0
+        # speichert Kanten, über die kürzester Weg geht
+        self.nodes_shortest_way = [[self.nodes[self.start],self.nodes[self.start]]]
+
 
 
     # Baut liste der Entfernungen von s ausgehend auf
@@ -16,13 +19,15 @@ class Dijkstra:
         b_nodes = set([]) # boundary nodes/Randknotenmenge
         i = self.start
 
+
         for l in range(nodecount):
             for j in range(nodecount):
                 v = self.adj[i][j]
                 if v>0 and v+dists[i] < dists[j]:
                     dists[j] = v+dists[i]
                     b_nodes.add(j)
-
+            # Speichert neue kürzteste Kante in Array
+            self.nodes_shortest_way.append([self.nodes[i],self.nodes[self.minweight_node(b_nodes)]])
             i = self.minweight_node(b_nodes)
 
     # Liefert Randknoten mit minimalem Abstand zum Start
@@ -42,3 +47,4 @@ class Dijkstra:
     def print_list(self):
         for n in range(len(self.nodes)):
             print("   \u279c {0}: {1}".format(self.nodes[n], self.dists[n]))
+        print(self.nodes_shortest_way)
