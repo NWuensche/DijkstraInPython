@@ -20,11 +20,11 @@ def main():
     adj = p.get_matrix()
     nodes = p.nodes
     v1, v2 = p.get_path()
-
+    
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
 
-    # TODO: Evtl. Quelle und Senke angeben, falls existent
+    print("The graph has {details}".format(details=p.graph_info(adj)))
 
     d = Dijkstra(adj,nodes,v1)
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')

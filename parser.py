@@ -74,3 +74,45 @@ class InputParser:
         else:
             print("Invalid path.")
             return self.get_path()
+
+    def graph_info(self, adj):
+        sources = []
+        sinks = []
+        iso = []
+        for i in range(len(adj)):
+
+            # Nur -1 in Spalte, aber nicht in Zeile -> Quelle
+            if max([adj[j][i] for j in range(len(adj))]) == -1 and \
+               max(adj[i]) > -1:
+                sources.append(self.nodes[i])
+
+            # Nur -1 in Zeile, aber nicht in Spalte -> Senke
+            elif max(adj[i]) == -1 and \
+                 max([adj[j][i] for j in range(len(adj))]) > -1:
+                sinks.append(self.nodes[i])
+
+            # Nur -1 in Zeile/Spalte -> isoliert
+            elif max(adj[i]) == -1:
+                iso.append(self.nodes[i])
+
+        if not sources: sources = ''
+        if not sinks:   sinks = ''
+        if not iso:     iso = ''
+
+        return "{srcs} source{s1}{src}, {snks} sink{s2}{snk} and {isos} isolated node{s3}{iso}".format(
+                srcs = len(sources),
+                src  = self.to_str(sources),
+                snks = len(sinks),
+                snk  = self.to_str(sinks),
+                isos = len(iso),
+                iso  = self.to_str(iso),
+                s1 = 's' if len(sources)!=1 else '',
+                s2 = 's' if len(sinks)!=1 else '',
+                s3 = 's' if len(iso)!=1 else '').replace('0 ', 'no ')
+
+    # Gibt zu liste einen string im Format (1, 2, 3) wieder
+    def to_str(self,list_):
+        if not list_: return ''
+        return ' (' + ', '.join(list_) + ')'
+
+
