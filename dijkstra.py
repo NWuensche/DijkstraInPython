@@ -47,10 +47,21 @@ class Dijkstra:
         return self.dists[self.nodes.index(v2)]
     # Gibt Pfad von Knoten zu einen Knoten aus dists wieder
     def path_to(self, v2):
-         return self.nodes_shortest_way
+        path = [v2]
+        currentNode = v2
+        while(currentNode != self.nodes[self.start]):
+            currentNode = self.get_next_node_on_path(currentNode)
+            path.append(currentNode)
+        path.reverse() # Weg ist nun richtig rum
+        return path
+
+    def get_next_node_on_path(self,currentNode):
+        for edge in self.nodes_shortest_way:
+            if edge[1] == str(currentNode) and edge[0]!=edge[1]:
+                return edge[0]
+
 
     # Ausgabe der kürzesten Wege von Knoten s zu allen anderen Knoten
     def print_list(self):
         for n in range(len(self.nodes)):
             print("   \u279c {0}: {1}".format(self.nodes[n], self.dists[n]))
-
