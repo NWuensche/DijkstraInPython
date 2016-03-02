@@ -28,7 +28,7 @@ def main():
     d = Dijkstra(adj,nodes,v1)
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
     print(d.dist_to(v2))
-    print(d.path_to(v2))
+    print(d.way)
 
     print("\nOther distances from {0}:".format(v1))
     d.print_list()

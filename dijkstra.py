@@ -8,7 +8,7 @@ class Dijkstra:
         self.dists = [float('inf') for x in range(len(adj))]
         self.dists[self.start] = 0
         # speichert Kanten, über die kürzester Weg geht
-        self.nodes_shortest_way = [[self.nodes[self.start],self.nodes[self.start]]]
+        self.way = []
 
 
 
@@ -16,7 +16,7 @@ class Dijkstra:
     def dist_list(self):
         dists = self.dists
         nodecount = len(self.adj)
-        b_nodes = set([]) # boundary nodes/Randknotenmenge
+        b_nodes = [-1 for x in range(nodecount)] # boundary nodes/Randknotenmenge
         i = self.start
 
 
@@ -25,42 +25,39 @@ class Dijkstra:
                 v = self.adj[i][j]
                 if v>0 and v+dists[i] < dists[j]:
                     dists[j] = v+dists[i]
-                    b_nodes.add([j,i]) # Knoten und Vorgänger jedes Randknoten speichern
-
-
+                    b_nodes[j] = i # Knoten und Vorgänger jedes Randknoten speichern
 
             i = self.minweight_node(b_nodes)
-            b_nodes.discard(i)
+            print("\n")
 
-    def build_path(self, node):
+            print(b_nodes)
+            print(dists)
+            print(i)
+
+            self.build_path([i,b_nodes[i]])
+            b_nodes[i] = -1
+
+            print(b_nodes)
+
+    def build_path(self, b_node):
+        self.way.append(b_node)
 
 
     # Liefert Randknoten mit minimalem Abstand zum Start
     def minweight_node(self, b_nodes):
-        if len(b_nodes)==0: return -1
-        minweight = min([self.dists[x[0]] for x in b_nodes])
+        if max(b_nodes)==-1: return -1
+        minweight = min([self.dists[i] for i,j in enumerate(b_nodes) if j>-1])
         node = self.dists.index(minweight)
-        # b_nodes.discard(node)
         return node
 
     # Gibt Entfernung zu einem Knoten aus dists wieder
     def dist_to(self, v2):
         self.dist_list()
         return self.dists[self.nodes.index(v2)]
+
     # Gibt Pfad von Knoten zu einen Knoten aus dists wieder
     def path_to(self, v2):
-        path = [v2]
-        currentNode = v2
-        while(currentNode != self.nodes[self.start]):
-            currentNode = self.get_next_node_on_path(currentNode)
-            path.append(currentNode)
-        path.reverse() # Weg ist nun richtig rum
-        return path
-
-    def get_next_node_on_path(self,currentNode):
-        for edge in self.nodes_shortest_way:
-            if edge[1] == str(currentNode) and edge[0]!=edge[1]:
-                return edge[0]
+        pass
 
 
     # Ausgabe der kürzesten Wege von Knoten s zu allen anderen Knoten
