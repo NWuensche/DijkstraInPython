@@ -42,6 +42,11 @@ class DijkstraNew:
             if edge[0] in self.visible_nodes:
                 self.visible_edges.append(edge)
 
+    # Wenn ich neuen Knoten besucht habe, dann alle ebageenden Kantne verlängern
+    def make_edges_longer(self):
+        for edge in range(len(self.edges)):
+            if(self.edges[edge][0] == self.visible_nodes[-1]):
+                self.edges[edge][1] += self.visible_edges[-1]
 
     # kürzeste, sichtbare Kante auswählen
     def get_shortest_edge(self):
