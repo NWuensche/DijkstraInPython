@@ -84,3 +84,22 @@ class DijkstraNew:
                 self.visible_nodes.append(shortest_edge[2])
             else:
                 break
+
+        return self.shortest_way(v2)
+
+    # Kürzesten Weg zu Knoten berechnen, unendlich, wenn kein Weg da
+    def shortest_way(self,v2):
+        way = [v2]
+        currentNode = v2
+        currentNodetmp = v2 # Wichtig, um zu schauen, ob Weg existiert
+        while currentNode is not self.start:
+            for edge in self.edges_in_dijkstra:
+                if edge[2] == currentNode:
+                    way.append(edge[0])
+                    currentNodetmp = edge[0]
+                    break
+            if(currentNode == currentNodetmp): # Wenn Wahr, dann kein Weg da
+                return float('inf')
+            currentNode = currentNodetmp
+        way.reverse()
+        return way
