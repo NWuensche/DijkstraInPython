@@ -35,9 +35,17 @@ class DijkstraNew:
         for edge in delete_edges:
             self.edges.pop(edge)
 
+    # Alle Kanten markieren, die sichtbar sind und noch nicht besucht wurden
+    def get_visible_edges(self):
+        self.visible_edges = []
+        for edge in self.edges:
+            if edge[0] in self.visible_nodes:
+                self.visible_edges.append(edge)
+
 
     # Hauptfunktion in Dijkstra, gibt kürzesten Weg zu v2 aus
     def get_shortest_way(self,v2):
 
         while True:
             self.delete_unnecessary_edges()
+            self.get_visible_edges()
