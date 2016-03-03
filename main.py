@@ -29,15 +29,18 @@ def main():
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
     print(d.dist_to(v2))
 
-    # Neuer Dijkstra
-    d2 = DijkstraNew(p.edges,v1)
-    print("Kürzester Weg")
-    print(d2.get_shortest_way(v2))
-    print("andere kürzeeste Wege")
-    #d2.print_list()
-
     print("\nOther distances from {0}:".format(v1))
     d.print_list()
+    # Neuer Dijkstra
+    print()
+    print("Dijkstra 2:")
+    d2 = DijkstraNew(p.edges,v1,nodes)
+    print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
+    print(d2.get_shortest_way(v2),end="")
+    print(", length: {0}".format(d2.get_length_to_node(v2)))
+    print("\nOther distances from {0}:".format(v1))
+    d2.print_list()
+
 
     print("\nFloyd-Warshall:\n")
     DG = ComputeTools(adj,nodes,v1)

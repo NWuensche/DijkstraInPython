@@ -1,11 +1,12 @@
 class DijkstraNew:
-    def __init__(self,edges,start):
+    def __init__(self,edges,start,nodes):
         self.edges = edges
         self.take_shorter_edges() # Bei doppelten Kanten kürzere nehmen
         self.start = start
         self.edges_in_dijkstra = [] # Kanten, über die Dijkstra geht
         self.visible_edges = [] # Sichtbare Kanten
         self.visible_nodes = [start] # Besuchte Knoten
+        self.nodes = nodes      # Liste aller Knoten
 
     # Falls doppelte Kanten zwischen Knoten, dann nur kürzesten lassen
     def take_shorter_edges(self):
@@ -99,7 +100,28 @@ class DijkstraNew:
                     currentNodetmp = edge[0]
                     break
             if(currentNode == currentNodetmp): # Wenn Wahr, dann kein Weg da
-                return float('inf')
+                return "There is no way"
             currentNode = currentNodetmp
         way.reverse()
         return way
+
+    def get_length_to_node(self,v2):
+        length = 0
+        currentNode = v2
+        currentNodetmp = v2 # Wichtig, um zu schauen, ob Weg existiert
+        while currentNode is not self.start:
+            for edge in self.edges_in_dijkstra:
+                if edge[2] == currentNode:
+                    length += float(edge[1])
+                    currentNodetmp = edge[0]
+                    break
+            if(currentNode == currentNodetmp): # Wenn Wahr, dann kein Weg da
+                return float('inf')
+            currentNode = currentNodetmp
+        return length
+
+
+    def print_list(self):
+        for node in self.nodes:
+            print("   \u279c {0}: {1}, length: {2}".format(node,
+                self.shortest_way(node), self.get_length_to_node(node)))
