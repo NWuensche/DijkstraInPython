@@ -3,6 +3,7 @@
 class InputParser:
     def __init__(self):
         self.nodes = None
+        self.edges = None
 
     def get_matrix(self):
 
@@ -16,8 +17,9 @@ class InputParser:
 
         #Schaut, ob Input fehlerfrei ist
         if self.check_edges(edges):
-            edges[0] = edges[0][0:3]
-
+            for edge in range(len(edges)):
+                edges[edge] = edges[edge][0:3]
+            self.edges = edges
             # Ziel- und Endknoten als set zusammenfassen,
             # dann in Liste sortieren
             nodes_out = {x[0] for x in edges}
@@ -114,5 +116,3 @@ class InputParser:
     def to_str(self,list_):
         if not list_: return ''
         return ' (' + ', '.join(list_) + ')'
-
-
