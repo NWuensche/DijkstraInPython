@@ -2,8 +2,8 @@
 
 class ComputeTools:
     def __init__(self,adj,nodes,start):
-        self.make_diagonal_zero(adj)
         self.adj = adj
+        self.make_diagonal_zero(self.adj)
         self.start = nodes.index(start)
         self.nodes = nodes
 
