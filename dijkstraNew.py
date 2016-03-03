@@ -34,3 +34,10 @@ class DijkstraNew:
     def delete_long_edges(self,delete_edges):
         for edge in delete_edges:
             self.edges.pop(edge)
+
+
+    # Hauptfunktion in Dijkstra, gibt kürzesten Weg zu v2 aus
+    def get_shortest_way(self,v2):
+
+        while True:
+            self.delete_unnecessary_edges()
