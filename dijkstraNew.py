@@ -43,9 +43,39 @@ class DijkstraNew:
                 self.visible_edges.append(edge)
 
 
+    # kürzeste, sichtbare Kante auswählen
+    def get_shortest_edge(self):
+        try:
+            shortest_edge = self.visible_edges[0]# TODO try-catch, wenn Fehler, dann fertig
+        except:
+            return []
+        for edge in self.visible_edges:
+            if(shortest_edge[1] > edge[1]):
+                shortest_edge = edge
+        # Neuer Knoten erreichbar
+        self.visible_nodes.append(shortest_edge[2])
+        return shortest_edge
+
+    #Löscht alle anderen Kanten, die zu schon besuchten Knoten gehen
+    def delete_unnecessary_edges(self):
+        delete_edges = []
+        for edge in range(len(self.edges)):
+            if(self.edges[edge][2] == self.visible_nodes[-1]):
+                delete_edges.append(edge)
+        if(delete_edges != [] and delete_edges != None):
+            delete_edges.reverse()
+            self.delete_long_edges(delete_edges)
+
+
     # Hauptfunktion in Dijkstra, gibt kürzesten Weg zu v2 aus
     def get_shortest_way(self,v2):
 
         while True:
             self.delete_unnecessary_edges()
             self.get_visible_edges()
+            shortest_edge = self.get_shortest_edge()
+            if(shortest_edge != []):
+                self.edges_in_dijkstra.append(shortest_edge)
+                self.visible_nodes.append(shortest_edge[2])
+            else:
+                break
