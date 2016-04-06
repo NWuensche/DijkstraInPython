@@ -29,7 +29,6 @@ class Dijkstra:
             # Speichert neue kürzteste Kante in Array
             # TODO: Weg zu Endknoten speichern, kürzeste Kante nicht unbedingt Teil des Weges
             self.nodes_shortest_way.append([self.nodes[i],self.nodes[self.minweight_node(b_nodes)]])
-
             i = self.minweight_node(b_nodes)
             b_nodes.discard(i)
 

@@ -4,6 +4,7 @@
 from parser import *
 from calculate_shortest_way import *
 from dijkstra import *
+from dijkstraNew import *
 
 # Matrix mit Unicode multiline braces printen
 def print_matrix(m):
@@ -20,7 +21,6 @@ def main():
     adj = p.get_matrix()
     nodes = p.nodes
     v1, v2 = p.get_path()
-
     print("\nAdjacency matrix is:\n")
     print_matrix(adj)
     print("The graph has {details}".format(details=p.graph_info(adj)))
@@ -28,15 +28,19 @@ def main():
     d = Dijkstra(adj,nodes,v1)
     print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
     print(d.dist_to(v2))
-    
-    # kürzesten Weg zwischen v1 und v2 ausgeben
-    shortest_way = d.path_to(v2)
-    for node in range(len(shortest_way)-1):
-        print("{0} \u279c ".format(shortest_way[node]),end="")
-    print(shortest_way[-1])
 
     print("\nOther distances from {0}:".format(v1))
     d.print_list()
+    # Neuer Dijkstra
+    print()
+    print("Dijkstra 2:")
+    d2 = DijkstraNew(p.edges,v1,nodes)
+    print("Shortest way {0} \u279c {1} (Dijkstra): ".format(v1,v2),end='')
+    print(d2.get_shortest_way(v2),end="")
+    print(", length: {0}".format(d2.get_length_to_node(v2)))
+    print("\nOther distances from {0}:".format(v1))
+    d2.print_list()
+
 
     print("\nFloyd-Warshall:\n")
     DG = ComputeTools(adj,nodes,v1)
